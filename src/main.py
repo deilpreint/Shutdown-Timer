@@ -1,4 +1,4 @@
-from gui import interface
+from gui.interface import create_app
 
 if __name__ == "__main__":
-    interface.create_app()
+    create_app()
