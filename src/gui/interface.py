@@ -27,7 +27,8 @@ def create_app():
 
     root = tk.Tk()
     root.title("Shutdown Timer")
-    root.geometry("450x320")
+    root.iconbitmap('icon.ico')  # Установите путь к значку, если есть
+    root.geometry("400x250")
     root.resizable(False, False)
 
     style = ttk.Style(root)
@@ -55,15 +56,18 @@ def create_app():
               background=[('active', '#d32f2f')],
               relief=[('pressed', 'sunken'), ('!pressed', 'raised')])
 
-    tk.Label(root, text="Часы:", font=('Arial', 12)).grid(row=0, column=0, padx=10, pady=10, sticky='w')
-    entry_hours = tk.Entry(root, width=5, font=('Arial', 12))
+    style.configure('TLabel', font=('Arial', 12))
+    style.configure('TEntry', padding=5)
+
+    ttk.Label(root, text="Часы:").grid(row=0, column=0, padx=10, pady=10, sticky='w')
+    entry_hours = ttk.Entry(root, width=5)
     entry_hours.insert(0, "0")
     entry_hours.bind("<FocusIn>", lambda e: on_entry_focus_in(entry_hours))
     entry_hours.bind("<FocusOut>", lambda e: on_entry_focus_out(entry_hours))
     entry_hours.grid(row=0, column=1, padx=10, pady=10, sticky='w')
 
-    tk.Label(root, text="Минуты:", font=('Arial', 12)).grid(row=1, column=0, padx=10, pady=10, sticky='w')
-    entry_minutes = tk.Entry(root, width=5, font=('Arial', 12))
+    ttk.Label(root, text="Минуты:").grid(row=1, column=0, padx=10, pady=10, sticky='w')
+    entry_minutes = ttk.Entry(root, width=5)
     entry_minutes.insert(0, "0")
     entry_minutes.bind("<FocusIn>", lambda e: on_entry_focus_in(entry_minutes))
     entry_minutes.bind("<FocusOut>", lambda e: on_entry_focus_out(entry_minutes))
@@ -75,5 +79,7 @@ def create_app():
     btn_cancel = ttk.Button(root, text="Отменить", style='Red.TButton', command=cancel)
     btn_cancel.grid(row=3, column=0, columnspan=2, pady=10, ipadx=10, ipady=5)
 
-    root.mainloop()
+    ttk.Label(root, text="Shutdown Timer © 2025", font=('Arial', 9), foreground='gray').grid(
+        row=4, column=0, columnspan=2, pady=(20, 5))
 
+    root.mainloop()
